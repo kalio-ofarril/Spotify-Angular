@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SectionGenericComponent } from "../../../../shared/components/section-generic/section-generic.component";
+import * as dataRaw from '../../../../data/tracks.json';
+import { TrackModel } from '@core/models/tracks.models';
 
 @Component({
   selector: 'app-tracks-page',
@@ -9,20 +11,13 @@ import { SectionGenericComponent } from "../../../../shared/components/section-g
 })
 export class TracksPageComponent implements OnInit{
 
-  mockTracksList = [
-    {
-      name: 'BEBE (Oficial)'
-    },
-    {
-      name: 'BEBE (Oficial)'
-    },
-    {
-      name: 'BEBE (Oficial)'
-    },
+  mockTracksList: Array<TrackModel> = [
+  
   ]
 
   ngOnInit(): void {
-    
+    const { data } : any = (dataRaw as any).default;
+    this.mockTracksList = data;
   }
 
 }
