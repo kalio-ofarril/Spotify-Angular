@@ -1,5 +1,6 @@
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { TrackModel } from '@core/models/tracks.models';
 
 @Component({
   selector: 'app-media-player',
@@ -9,14 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MediaPlayerComponent implements OnInit{
   
-
-  mockCover: any = {
+  mockCover: TrackModel = {
     cover: 'https://picsum.photos/200',
     album: 'Album',
-    name: 'Rolota'
+    name: 'Rolota',
+    url: '',
+    _id: '1'
   }
 
   ngOnInit(): void {
     
   }
+
 }
