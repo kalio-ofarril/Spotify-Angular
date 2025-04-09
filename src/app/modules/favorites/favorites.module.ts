@@ -8,7 +8,7 @@ import { FavoritesRoutingModule } from './favorites-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    FavoritesRoutingModule
+    FavoritesRoutingModule,
   ]
 })
 export class FavoritesModule { }
