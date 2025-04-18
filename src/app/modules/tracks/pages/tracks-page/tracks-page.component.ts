@@ -12,7 +12,6 @@ import { Subscription } from "rxjs";
   styleUrl: "./tracks-page.component.css",
 })
 export class TracksPageComponent implements OnInit {
-  
   tracksTrending: Array<TrackModel> = [];
   tracksRandom: Array<TrackModel> = [];
 
@@ -20,25 +19,22 @@ export class TracksPageComponent implements OnInit {
 
   constructor(private trackService: TrackService) {}
 
+  async loadAllData(): Promise<any> {
+    this.tracksTrending = await this.trackService.getAllTracks$().toPromise();
+  }
+
+  loadRandomData(): void {
+    this.trackService.getAllRandom$().subscribe((response) => {
+      this.tracksRandom = response;
+    }, err => {
+      console.log("Error ", err)
+    });
+  }
+
   ngOnInit(): void {
-    const observer1$ = this.trackService.dataTracksTrending$.subscribe(
-      (response) => {
-        this.tracksTrending = response;
-        console.log("canciones trending 👌 --->", response);
-      }
-    );
-
-    const observer2$ = this.trackService.dataTracksRandom$.subscribe(
-      (response) => {
-        this.tracksRandom = [...this.tracksRandom, ...response];
-        console.log("canciones random 👍 --->", response);
-      }
-    );
-
-    this.listObservers$ = [observer1$, observer2$];
+    this.loadAllData();
+    this.loadRandomData();
   }
 
-  ngOnDestroy(): void {
-    this.listObservers$.forEach(o => o.unsubscribe());
-  }
+  ngOnDestroy(): void {}
 }
