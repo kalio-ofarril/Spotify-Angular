@@ -6,13 +6,14 @@ import {
   provideClientHydration,
   withEventReplay,
 } from "@angular/platform-browser";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, provideHttpClient, withInterceptors } from "@angular/common/http";
+import { injectSessionInterceptor } from "@core/interceptors/inject-session.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    importProvidersFrom(HttpClientModule) 
+    provideHttpClient(withInterceptors([injectSessionInterceptor]))
   ],
 };
