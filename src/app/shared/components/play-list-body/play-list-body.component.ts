@@ -1,6 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import * as dataRaw from '../../../data/tracks.json';
+import { Component, Input, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.models';
 import { OrderListPipe } from "../../pipe/order-list.pipe";
 
@@ -12,7 +11,7 @@ import { OrderListPipe } from "../../pipe/order-list.pipe";
 })
 export class PlayListBodyComponent implements OnInit{
 
-  tracks: TrackModel[] = [];
+  @Input() tracks: TrackModel[] = [];
   optionSort: {property: string | null, order: string} = {property: null, order: 'asc'};
 
   changeSort(property: string): void {
@@ -24,8 +23,7 @@ export class PlayListBodyComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const { data } : any = (dataRaw as any).default;
-    this.tracks = data;
+    
   }
 
 }
