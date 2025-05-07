@@ -1,28 +1,30 @@
-import { NgClass, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { TrackModel } from '@core/models/tracks.models';
-import { ImgBrokenDirective } from '@shared/directives/img-broken.directive';
-import { MultimediaService } from '@shared/services/multimedia.service';
+import { NgClass, NgIf } from "@angular/common";
+import { Component, Input, OnInit } from "@angular/core";
+import { TrackModel } from "@core/models/tracks.models";
+import { ImgBrokenDirective } from "@shared/directives/img-broken.directive";
+import { MultimediaService } from "@shared/services/multimedia.service";
 
 @Component({
-  selector: 'app-card-player',
+  selector: "app-card-player",
   imports: [NgIf, NgClass, ImgBrokenDirective],
-  templateUrl: './card-player.component.html',
-  styleUrl: './card-player.component.css'
+  templateUrl: "./card-player.component.html",
+  styleUrl: "./card-player.component.css",
 })
-export class CardPlayerComponent implements OnInit{
-
-  @Input() mode: 'small' | 'big' = 'small';
-  @Input() track!: TrackModel;
+export class CardPlayerComponent implements OnInit {
+  @Input() mode: "small" | "big" = "small";
+  @Input() track: TrackModel = {
+    _id: 0,
+    name: "",
+    album: "",
+    url: "",
+    cover: "",
+  };
 
   constructor(private multimediaService: MultimediaService) {}
 
   sendPlay(track: TrackModel): void {
-    this.multimediaService.callback.emit(track)
+    this.multimediaService.trackInfo$.next(track);
   }
 
-  ngOnInit(): void {
-    
-  }
-
+  ngOnInit(): void {}
 }
