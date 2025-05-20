@@ -11,7 +11,7 @@ import { CardPlayerComponent } from '../card-player/card-player.component';
 })
 export class SectionGenericComponent implements OnInit{
 
-  @Input() title: string = '';
+  @Input({required: true}) title: string = '';
   @Input() mode: 'small' | 'big' = 'big';
   @Input() dataTracks: Array<TrackModel> = [];
 

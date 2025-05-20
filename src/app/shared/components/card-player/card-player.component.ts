@@ -11,7 +11,7 @@ import { MultimediaService } from "@shared/services/multimedia.service";
   styleUrl: "./card-player.component.css",
 })
 export class CardPlayerComponent implements OnInit {
-  @Input() mode: "small" | "big" = "small";
+  @Input({required: true}) mode: "small" | "big" = "small";
   @Input() track: TrackModel = {
     _id: 0,
     name: "",
