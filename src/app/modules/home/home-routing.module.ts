@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { currentUser } from '@core/utils/getCurrentUser';
 
 const routes: Routes = [
   {
     path: 'tracks',
+    resolve: {
+      currentUser
+    },
     loadChildren: () => import('@modules/tracks/tracks.module').then(m => m.TracksModule)
   },
   {
